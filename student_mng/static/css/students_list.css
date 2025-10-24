@@ -1,0 +1,34 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f4f6f9;
+}
+
+.navbar-brand {
+    font-size: 1.5rem;
+}
+
+.profile-img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 2px solid #dee2e6;
+}
+
+.card {
+    border-radius: 12px;
+}
+
+.card-title i {
+    margin-right: 8px;
+}
+
+.table-hover tbody tr:hover {
+    background-color: #e9ecef;
+    transition: 0.2s;
+}
+
+.btn i {
+    margin: 0;
+    font-size: 1rem;
+}

@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block title %}About Us | Student Management{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+  <div class="text-center mb-4">
+    <h2 class="fw-bold text-primary">About Student Management System</h2>
+    <hr class="mx-auto" style="width: 80px; border-top: 3px solid #6a11cb;">
+  </div>
+
+  <div class="bg-white p-4 rounded-4 shadow-sm">
+    <p class="mb-3">
+      The <span class="fw-semibold text-primary">Student Management System (SMS)</span> is a comprehensive web-based platform designed to simplify and streamline academic administration for schools, colleges, and educational institutions. It allows administrators and educators to efficiently manage student profiles, track course enrollments, monitor attendance, and maintain academic performance records — all in one centralized and secure system.
+    </p>
+
+    <p class="mb-3">
+      Built with a <span class="fw-semibold">user-friendly interface</span>, SMS ensures that managing student data is intuitive and fast, reducing administrative overhead and eliminating paperwork. The platform supports <span class="fw-semibold">role-based access</span>, allowing students, teachers, and administrators to interact with the system according to their specific privileges, ensuring security and privacy.
+    </p>
+
+    <p class="mb-3">
+      With <span class="fw-semibold">real-time data management</span>, automated reporting, and streamlined communication tools, SMS empowers educators to make informed decisions, enhances transparency, and provides students with timely access to their academic progress. Whether it’s enrolling new students, assigning courses, or generating detailed performance reports, SMS makes academic management more organized, efficient, and reliable.
+    </p>
+    
+    <div class="text-center mt-4">
+      <a href="{% url 'home' %}" class="btn btn-gradient px-4 py-2 rounded-pill text-white">
+        ← Back to Home
+      </a>
+    </div>
+  </div>
+</div>
+
+<style>
+.btn-gradient {
+  background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+  color: white;
+  border: none;
+  transition: all 0.3s ease;
+}
+.btn-gradient:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(37, 117, 252, 0.25);
+  color: #fff;
+}
+</style>
+{% endblock %}

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course List</title>
+</head>
+<body>
+    <h2>Courses</h2>
+    <table>
+        <tr>
+            <th>Course Name</th>
+            <th>Course Description</th>
+            <th>Actions</th>
+            
+        </tr>
+        {% for course in courses %}
+        <tr>
+            <td>{{course.course_name}}</td>
+            <td>{{course.course_description}}</td>
+            <td><a href="{% url 'edit_course' course.pk%}"> Edit</a></td>
+            <td><a href="{% url 'delete_course' course.pk %}" onclick="return confirm('are you sure you want to delete {{course.course_name}} ')">Delete</a></td>
+        </tr>
+        {%endfor%}
+    </table>
+</body>
+</html>

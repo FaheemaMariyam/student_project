@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% block title %}Register | Student Management{% endblock %}
+{% block content %}
+
+<div class="d-flex justify-content-center align-items-center" style="min-height: 80vh;">
+  <div class="card shadow-lg p-4 rounded-4" style="width: 100%; max-width: 480px;">
+    <h2 class="text-center fw-bold mb-4 text-primary">Create Your Account ✨</h2>
+
+    <form method="POST" class="needs-validation" novalidate>
+      {% csrf_token %}
+
+      {% for field in form %}
+      <div class="mb-3">
+        <label class="form-label fw-semibold">{{ field.label }}</label>
+        {{ field }}
+        {% if field.help_text %}
+          <small class="text-muted d-block">{{ field.help_text }}</small>
+        {% endif %}
+        {% if field.errors %}
+          <div class="text-danger small mt-1">{{ field.errors|striptags }}</div>
+        {% endif %}
+      </div>
+      {% endfor %}
+
+      <button type="submit" class="btn w-100 text-white fw-semibold py-2 mt-2"
+        style="background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+               border-radius: 12px;
+               transition: all 0.3s ease;">
+        Register
+      </button>
+    </form>
+
+    <div class="text-center mt-4">
+      <p class="mb-1">Already have an account?
+        <a href="{% url 'login' %}" class="text-decoration-none fw-semibold text-primary">Login</a>
+      </p>
+      <a href="{% url 'home' %}" class="text-muted small text-decoration-none">
+        <i class="bi bi-house-door"></i> Back to Home
+      </a>
+    </div>
+  </div>
+</div>
+
+<style>
+  form input, form select, form textarea {
+    border-radius: 10px !important;
+    border: 1px solid #ccc !important;
+    padding: 10px 14px !important;
+    width: 100%;
+    font-size: 15px;
+    transition: all 0.3s ease;
+  }
+
+  form input:focus {
+    border-color: #6a11cb !important;
+    box-shadow: 0 0 5px rgba(106, 17, 203, 0.3);
+    outline: none;
+  }
+
+  button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(37, 117, 252, 0.25);
+  }
+
+  .card {
+    border: none;
+  }
+</style>
+
+{% endblock %}

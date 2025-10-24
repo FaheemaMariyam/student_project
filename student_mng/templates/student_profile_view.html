@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block title %}My Profile{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+  <!-- Back Button -->
+  <a href="{% url 'dashboard' %}" class="btn btn-secondary mb-4">
+    <i class="bi bi-arrow-left"></i> 
+  </a>
+
+  <h2 class="fw-bold text-primary mb-4">My Profile</h2>
+
+  <div class="card-dashboard p-4">
+    <div class="row">
+      <!-- Profile Image -->
+      <div class="col-md-3 text-center mb-3">
+        {% if profile.profile_image %}
+          <img src="{{ profile.profile_image.url }}" 
+               class="rounded-circle border shadow-sm" 
+               alt="Profile Image" 
+               width="250" height="250" 
+               style="object-fit: cover;">
+        {% else %}
+          <i class="bi bi-person-circle" 
+             style="font-size: 10rem; color: #6a11cb;"></i>
+        {% endif %}
+      </div>
+
+      <!-- Profile Details -->
+      <div class="col-md-9">
+        <p><strong>Name:</strong> {{ profile.student_name|default:"Not filled" }}</p>
+        <p><strong>Roll Number:</strong> {{ profile.student_rollno|default:"Not filled" }}</p>
+        <p><strong>Courses:</strong> 
+          {% for course in profile.student_course.all %}
+            {{ course.course_name }}{% if not forloop.last %}, {% endif %}
+          {% empty %}
+            Not assigned
+          {% endfor %}
+        </p>
+        <p><strong>Enrollment Date:</strong> {{ profile.student_enrollment_date|default:"Not filled" }}</p>
+        <p><strong>Phone:</strong> {{ profile.phone|default:"Not filled" }}</p>
+        <p><strong>Address:</strong> {{ profile.address|default:"Not filled" }}</p>
+        <p><strong>Date Of Birth:</strong> {{ profile.date_of_birth|default:'Not filled' }}</p>
+        <p><strong>Age:</strong> {{ profile.age|default:"Not filled" }}</p>
+
+        <a href="{% url 'profile_edit' %}" class="btn btn-gradient px-4 py-2 rounded-pill text-white mt-3">
+          <i class="bi bi-pencil-square"></i> Edit Profile
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
