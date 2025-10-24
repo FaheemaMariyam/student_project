@@ -2,23 +2,73 @@
 {% block title %}Edit Profile{% endblock %}
 
 {% block content %}
+<style>
+  body {
+    background: linear-gradient(135deg, #e3f2fd, #f8f9fa);
+    font-family: 'Poppins', sans-serif;
+  }
+  .card-dashboard {
+    background: #ffffff;
+    border: none;
+    border-radius: 20px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    transition: 0.3s;
+  }
+  .card-dashboard:hover {
+    box-shadow: 0 12px 25px rgba(13, 110, 253, 0.2);
+  }
+  h2 {
+    font-weight: 600;
+  }
+  form input,
+  form select,
+  form textarea {
+    border-radius: 10px !important;
+    padding: 10px 12px;
+    border: 1px solid #ced4da;
+  }
+  .btn-gradient {
+    background: linear-gradient(90deg, #0d6efd, #4e73df);
+    border: none;
+    transition: 0.3s ease;
+  }
+  .btn-gradient:hover {
+    background: linear-gradient(90deg, #0056d2, #3956b8);
+    box-shadow: 0 4px 10px rgba(13, 110, 253, 0.3);
+  }
+  .btn-secondary {
+    border-radius: 50px;
+    padding: 8px 20px;
+    transition: 0.3s;
+  }
+  .btn-secondary:hover {
+    background-color: #5a6268;
+  }
+</style>
+
 <div class="container my-5">
   <!-- Back Button -->
   <a href="{% url 'dashboard' %}" class="btn btn-secondary mb-4">
     <i class="bi bi-arrow-left"></i> 
   </a>
 
-  <h2 class="fw-bold text-primary mb-4">Edit Profile</h2>
+  <h2 class="fw-bold text-primary mb-4 text-center">
+    <i class="bi bi-person-circle"></i> Edit Profile
+  </h2>
 
-  <div class="card-dashboard p-4">
+  <div class="card-dashboard p-5">
     <form method="POST" enctype="multipart/form-data">
       {% csrf_token %}
       
-      {{ form.as_p }}
+      <div class="row g-3">
+        {{ form.as_p }}
+      </div>
 
-      <button type="submit" class="btn btn-gradient px-4 py-2 rounded-pill text-white mt-3">
-        <i class="bi bi-save"></i> Save Changes
-      </button>
+      <div class="text-center mt-4">
+        <button type="submit" class="btn btn-gradient px-5 py-2 rounded-pill text-white">
+          <i class="bi bi-save"></i> Save Changes
+        </button>
+      </div>
     </form>
   </div>
 </div>
