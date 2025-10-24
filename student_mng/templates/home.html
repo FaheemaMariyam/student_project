@@ -1,7 +1,74 @@
 {% extends 'base.html' %}
+{% load static %}
+
 {% block title %}
 Home
 {% endblock %}
+
 {% block content %}
-<h1>Hello welcome</h1>
+<style>
+  /* Full-page light blue hero section matching base.html spacing */
+  .hero-section {
+    width: 100%;
+    min-height: calc(100vh - 75px - 50px); /* navbar height + footer approx */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: linear-gradient(135deg, #cce7ff, #99d4ff); /* light blue */
+    padding: 2rem;
+    box-sizing: border-box;
+    color: #003366;
+  }
+
+  .hero-content {
+    max-width: 900px;
+    width: 90%;
+  }
+
+  .hero-content h1 {
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+  }
+
+  .hero-content p {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .btn-gradient {
+    background: linear-gradient(135deg, #174e72, #3399ff);
+    color: white;
+    border: none;
+    transition: all 0.3s ease;
+  }
+
+  .btn-gradient:hover {
+    background: linear-gradient(135deg, #3399ff, #1a8cff);
+    transform: translateY(-2px);
+  }
+
+  @media (max-width: 768px) {
+    .hero-content h1 {
+      font-size: 2.2rem;
+    }
+    .hero-content p {
+      font-size: 1rem;
+    }
+  }
+</style>
+
+<div class="hero-section">
+  <div class="hero-content">
+    <h1>Welcome to Student Management System</h1>
+    <p>Manage students, courses, and academic records easily in a clean and efficient platform.</p>
+    <a href="{% url 'register' %}" class="btn btn-gradient btn-lg me-3">
+      <i class="bi bi-person-plus-fill me-2"></i> Register
+    </a>
+    <a href="{% url 'login' %}" class="btn btn-outline-light btn-lg">
+      <i class="bi bi-box-arrow-in-right me-2"></i> Login
+    </a>
+  </div>
+</div>
 {% endblock %}

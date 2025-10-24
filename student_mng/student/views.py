@@ -120,9 +120,27 @@ def student_profile_edit(request):
 
 @login_required
 def student_courses_view(request):
-    profile, created = StudentProfile.objects.get_or_create(user=request.user)
-    courses = profile.student_course.all()  # ManyToMany field
-    return render(request, "student_courses.html", {"courses": courses})
+    profile = StudentProfile.objects.get(user=request.user)
+    courses = profile.student_course.all()
+
+    # Retrieve completed courses from session (if any)
+    completed_ids = request.session.get("completed_courses", [])
+
+    if request.method == "POST":
+        completed_ids = request.POST.getlist("completed")
+        request.session["completed_courses"] = completed_ids  # Save to session
+
+    # Add a flag to each course for template rendering
+    course_data = []
+    for course in courses:
+        course_data.append({
+            "id": course.id,
+            "name": course.course_name,
+            "description": course.course_description,
+            "completed": str(course.id) in completed_ids,
+        })
+
+    return render(request, "student_courses.html", {"courses": course_data})
 
 
 @staff_member_required
