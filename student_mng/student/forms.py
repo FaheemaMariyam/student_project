@@ -81,3 +81,4 @@ class CourseForm(forms.ModelForm):
                 attrs={"class": "form-control", "rows": 4}
             ),
         }
+
