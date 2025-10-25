@@ -69,9 +69,11 @@
         <table class="table table-striped align-middle">
             <thead>
                 <tr>
-                    <th>#</th>
+                    <th></th>
                     <th>Course Name</th>
                     <th>Course Description</th>
+                    <th>Created At</th>
+                    <th>Updated At</th>
                     <th colspan="2">Actions</th>
                 </tr>
             </thead>
@@ -81,6 +83,8 @@
                     <td>{{ forloop.counter }}</td>
                     <td>{{ course.course_name }}</td>
                     <td>{{ course.course_description|default:"No description available" }}</td>
+                    <td>{{ course.created_at }}</td>
+                    <td>{{ course.updated_at }}</td>
                     <td>
                         <a href="{% url 'edit_course' course.pk %}" class="btn btn-edit btn-sm">
                             <i class="bi bi-pencil-square"></i> Edit

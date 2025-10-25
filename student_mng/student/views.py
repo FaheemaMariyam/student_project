@@ -43,7 +43,7 @@ def register_user(request):
             return redirect("login")
 
         else:
-            print(form.errors)  # 🔍 See errors in terminal
+            print(form.errors)  #  See errors in terminal
             messages.error(request, "Please correct the errors below.")
     else:
         form = UserRegisterForm()
@@ -149,7 +149,7 @@ def students_list(request):
     # students=StudentProfile.objects.filter(user__role='Student',
     #                                        student_name__istartswith='r'
     #                                        )
-    students = StudentProfile.objects.filter(user__role="Student")
+    students = StudentProfile.objects.filter(user__role="Student").order_by('id')#-id for in descending
     # get the data from url query parameter'q'
     query = request.GET.get("q")
 
@@ -159,14 +159,16 @@ def students_list(request):
             student_name__icontains=query
         )  # icontains=for casesensitivity
     # pagination
-    paginator = Paginator(students, 5)
+    # paginator = Paginator(students, 5)
     # get page number from query
-    page_number = request.GET.get("page")
-    page_obj = paginator.get_page(page_number)
+    # page_number = request.GET.get("page")
+    # page_obj = paginator.get_page(page_number)
     return render(
         request,
         "students_list.html",
-        {"students": students, "query": query, "page_obj": page_obj},
+        # {"students": students, "query": query, "page_obj": page_obj},
+                {"students": students, "query": query},
+
     )  # query for keep the query in search box
 
 
@@ -344,3 +346,21 @@ def delete_course(request, pk):
     course.delete()
     messages.success(request, f" {course_name} has been deleted successfully ")
     return redirect("dashboard")
+# @login_required
+# def completed_courses_view(request):
+#     profile = StudentProfile.objects.get(user=request.user)
+#     completed_ids = request.session.get("completed_courses", [])
+#     courses = profile.student_course.filter(id__in=completed_ids)
+
+#     course_data = []
+#     for course in courses:
+#         course_data.append({
+#             "id": course.id,
+#             "name": course.course_name,
+#             "description": course.course_description,
+#             "completed": True,  # all courses here are completed
+#         })
+
+#     return render(request, "completed_courses.html", {"courses": course_data})
+
+

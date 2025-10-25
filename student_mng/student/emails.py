@@ -4,6 +4,7 @@ from django.conf import settings
 def send_welcome_email(user_email, username):
     subject = "Welcome to our app"
     message = f"Hi {username} \n\nThank you for registering at our site!\n\nBest Regards,\nTeam"
+    
     from_email = settings.DEFAULT_FROM_EMAIL
     recipient_list = [user_email]
 
