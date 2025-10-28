@@ -40,6 +40,7 @@
 <div class="position-fixed top-0 end-0 p-3" style="z-index: 1100">
     {% if messages %}
         {% for message in messages %}
+        <!-- #for 3 sec delay -->
             <div class="toast align-items-center text-bg-{{ message.tags|default:'info' }} border-0" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="3000">
                 <div class="d-flex">
                     <div class="toast-body">

@@ -42,8 +42,8 @@ class Course(models.Model):
 
 
 class StudentProfile(models.Model):
-    user = models.OneToOneField(get_user_model(), on_delete=models.CASCADE)
-    student_name = models.CharField(max_length=50, null=True, blank=True)
+    user = models.OneToOneField(get_user_model(), on_delete=models.CASCADE) #used custom models in User(role) so get_user_model
+    student_name = models.CharField(max_length=50, null=True, blank=True)#null for store data as null in db,blank for allow empty field in forms
     student_rollno = models.IntegerField(null=True, blank=True, unique=True)
     student_course = models.ManyToManyField("Course", blank=True)
     student_enrollment_date = models.DateField(null=True, blank=True)

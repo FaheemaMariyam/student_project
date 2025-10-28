@@ -76,10 +76,12 @@ def logout_user(request):
 
 @login_required
 def dashboard(request):
-    students = StudentProfile.objects.filter(user__role="Student")
+    
     user = request.user
     if user.is_superuser or user.role == "Admin":
+        students = StudentProfile.objects.filter(user__role="Student")
         return render(
+            
             request, "admin_dashboard.html", {"user": user, "students": students}
         )
     elif user.role == "Student":
@@ -100,7 +102,7 @@ def student_profile_edit(request):
     if request.method == "POST":
         form = StudentProfileForm(request.POST, request.FILES, instance=profile)
         if form.is_valid():
-            student = form.save(commit=False)
+            student = form.save(commit=False)#commit false bbcz calculate age before save the form
             # calculate age from dob
             if student.date_of_birth:
                 today = date.today()
@@ -124,20 +126,21 @@ def student_courses_view(request):
     courses = profile.student_course.all()
 
     # Retrieve completed courses from session (if any)
-    completed_ids = request.session.get("completed_courses", [])
+    completed_ids = request.session.get("completed_courses", [])#session
 
     if request.method == "POST":
         completed_ids = request.POST.getlist("completed")
         request.session["completed_courses"] = completed_ids  # Save to session
-
+        # profile.completed_courses.set(completed_ids)(many to many in model)
     # Add a flag to each course for template rendering
+    # completed_ids = profile.completed_courses.values_list("id", flat=True)
     course_data = []
     for course in courses:
         course_data.append({
             "id": course.id,
             "name": course.course_name,
             "description": course.course_description,
-            "completed": str(course.id) in completed_ids,
+            "completed": str(course.id) in completed_ids, #str for session
         })
 
     return render(request, "student_courses.html", {"courses": course_data})
@@ -150,7 +153,7 @@ def students_list(request):
     #                                        student_name__istartswith='r'
     #                                        )
     students = StudentProfile.objects.filter(user__role="Student").order_by('id')#-id for in descending
-    # get the data from url query parameter'q'
+    # get the data from url query parameter'q' for searching
     query = request.GET.get("q")
 
     # if user type something
@@ -234,7 +237,7 @@ def edit_students(request, pk):
             # Save student instance (but not m2m yet)
             student = profile_form.save(commit=False)
 
-            # 🔹 Recalculate age
+            #  Recalculate age
             if student.date_of_birth:
                 today = date.today()
                 age = today.year - student.date_of_birth.year
@@ -252,10 +255,10 @@ def edit_students(request, pk):
             # Save ManyToMany relationships
             profile_form.save_m2m()
 
-            # 🔹 Get new courses after saving
+            #  Get new courses after saving
             new_courses = set(student.student_course.all()) - old_courses
 
-            # 🔹 Send notification only for newly assigned courses
+            #  Send notification only for newly assigned courses
             if new_courses:
                 for course in new_courses:
                     send_add_course_email(
@@ -289,8 +292,8 @@ def delete_students(request, pk):
         return redirect("dashboard")
     student = students_qset.first()
     user = student.user
-    student.delete()
-    user.delete()
+    student.delete() #delete profile first
+    user.delete() #then delete user
     messages.success(request, f"{student.student_name} has been deleted successfully")
     return redirect("dashboard")
 

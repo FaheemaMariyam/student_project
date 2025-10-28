@@ -8,7 +8,7 @@ def send_welcome_email(user_email, username):
     from_email = settings.DEFAULT_FROM_EMAIL
     recipient_list = [user_email]
 
-    send_mail(subject, message, from_email, recipient_list, fail_silently=False)
+    send_mail(subject, message, from_email, recipient_list, fail_silently=False)#fail silently for debugging if the mail sent fail
 
 
 def send_add_student_email(user_email, username, password):

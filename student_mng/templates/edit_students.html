@@ -62,7 +62,7 @@
         <form method="POST" enctype="multipart/form-data">
             {% csrf_token %}
 
-            <!-- ✅ User Info -->
+            <!--  User Info -->
             <div class="mb-4">
                 <div class="section-title">User Info</div>
                 <div class="p-3 bg-light rounded">
@@ -70,11 +70,12 @@
                 </div>
             </div>
 
-            <!-- ✅ Profile Info -->
+            <!--  Profile Info -->
             <div class="mb-4">
                 <div class="section-title">Profile Info</div>
                 <div class="row p-3 bg-light rounded g-3">
                     <div class="col-md-6">
+                        <!-- # label tag for the customized fields  -->
                         {{ profile_form.student_name.label_tag }}
                         {{ profile_form.student_name }}
                     </div>
@@ -107,6 +108,7 @@
                             <img src="{{ profile_form.instance.profile_image.url }}" alt="Profile Image" class="profile-img mb-3">
                         {% endif %}
                         <div>
+                            
                             {{ profile_form.profile_image.label_tag }}
                             {{ profile_form.profile_image }}
                         </div>
@@ -114,7 +116,7 @@
                 </div>
             </div>
 
-            <!-- ✅ Assign Courses -->
+            <!-- Assign Courses -->
             <div class="mb-4">
                 <div class="section-title">Assign Courses</div>
                 <div class="p-3 bg-light rounded">
@@ -122,7 +124,7 @@
                 </div>
             </div>
 
-            <!-- ✅ Buttons -->
+            <!--  Buttons -->
             <div class="d-flex justify-content-center mt-4">
                 <button type="submit" class="btn btn-primary hover-shadow me-3">
                     <i class="bi bi-save"></i> Update

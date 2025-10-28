@@ -80,6 +80,7 @@
             <tbody>
                 {% for course in courses %}
                 <tr>
+                    <!-- #for order serial number -->
                     <td>{{ forloop.counter }}</td>
                     <td>{{ course.course_name }}</td>
                     <td>{{ course.course_description|default:"No description available" }}</td>
